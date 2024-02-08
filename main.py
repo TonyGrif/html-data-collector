@@ -3,7 +3,9 @@
 """Main module for the html data collector."""
 
 import argparse
+import hashlib
 import logging
+from pathlib import Path
 
 import requests
 
@@ -64,6 +66,24 @@ def main():
         return
 
     logging.info("Response returned")
+
+    hash_val = hashlib.md5(args.uri.encode("utf-8").strip())
+    logging.info("Hash generated: %s", hash_val.hexdigest())
+
+    org_path = Path(f"output/{hash_val.hexdigest()}.txt")
+    org_path.parent.mkdir(exist_ok=True)
+
+    with open("output/KEYS.txt", "a+", encoding="utf-8") as keys:
+        keys.seek(0)
+        exists = f"{hash_val.hexdigest()}\n" in keys.readlines()
+        if not exists:
+            logging.info("Adding hash to KEYS.txt")
+            keys.write(hash_val.hexdigest() + "\n")
+        else:
+            logging.info("Hash is already present in KEYS.txt")
+
+    with open(org_path, "w", encoding="utf-8") as org:
+        pass
 
 
 if __name__ == "__main__":
