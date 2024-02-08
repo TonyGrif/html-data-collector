@@ -13,6 +13,12 @@ def main():
     )
 
     parser.add_argument(
+        "uri",
+        type=str,
+        help="The URI to gather text from."
+    )
+
+    parser.add_argument(
         "-v",
         "--verbose",
         action="store_const",
@@ -33,6 +39,8 @@ def main():
     args = parser.parse_args()
     # TODO: Set specific loggers, not all at once
     logging.basicConfig(level=args.logging_level)
+
+    logging.info("Requesting:%s", args.uri)
 
 
 if __name__ == "__main__":
