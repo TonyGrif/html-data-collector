@@ -8,6 +8,7 @@ import logging
 from pathlib import Path
 
 import requests
+from boilerpy3 import extractors
 
 
 def main():
@@ -70,8 +71,13 @@ def main():
     hash_val = hashlib.md5(args.uri.encode("utf-8").strip())
     logging.info("Hash generated: %s", hash_val.hexdigest())
 
+    extractor = extractors.ArticleExtractor()
+    content = extractor.get_content(response.text)
+
     org_path = Path(f"output/original/{hash_val.hexdigest()}.txt")
     org_path.parent.mkdir(exist_ok=True, parents=True)
+    boil_path = Path(f"output/processed/{hash_val.hexdigest()}.txt")
+    boil_path.parent.mkdir(exist_ok=True, parents=True)
 
     with open("output/KEYS.txt", "a+", encoding="utf-8") as keys:
         keys.seek(0)
@@ -82,9 +88,14 @@ def main():
         else:
             logging.info("Hash is already present in KEYS.txt")
 
-    with open(org_path, "w", encoding="utf-8") as org:
+    with open(org_path, "w", encoding="utf-8") as org, open(
+        boil_path, "w", encoding="utf-8"
+    ) as bog:
         logging.info("Writing text to %s", org_path)
         org.write(response.text)
+
+        logging.info("Writing text to %s", boil_path)
+        bog.write(content)
 
 
 if __name__ == "__main__":
