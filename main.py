@@ -68,11 +68,15 @@ def main():
 
     logging.info("Response returned")
 
+    extractor = extractors.ArticleExtractor(raise_on_failure=False)
+    content = extractor.get_content(response.text)
+
+    if len(content) == 0:
+        logging.error("Not enough information gathered, aborting")
+        return
+
     hash_val = hashlib.md5(args.uri.encode("utf-8").strip())
     logging.info("Hash generated: %s", hash_val.hexdigest())
-
-    extractor = extractors.ArticleExtractor()
-    content = extractor.get_content(response.text)
 
     org_path = Path(f"output/original/{hash_val.hexdigest()}.txt")
     org_path.parent.mkdir(exist_ok=True, parents=True)
