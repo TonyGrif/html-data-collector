@@ -5,6 +5,8 @@
 import argparse
 import logging
 
+import requests
+
 
 def main():
     """Main driver of the html data collector script."""
@@ -12,11 +14,7 @@ def main():
         description="Gather text from an HTTP response and store for later analysis."
     )
 
-    parser.add_argument(
-        "uri",
-        type=str,
-        help="The URI to gather text from."
-    )
+    parser.add_argument("uri", type=str, help="The URI to gather text from.")
 
     parser.add_argument(
         "-v",
@@ -41,6 +39,21 @@ def main():
     logging.basicConfig(level=args.logging_level)
 
     logging.info("Requesting:%s", args.uri)
+
+    try:
+        request = requests.get(args.uri, timeout=5)
+    except (
+        requests.exceptions.MissingSchema,
+        requests.exceptions.InvalidURL,
+        requests.exceptions.ConnectionError,
+    ):
+        logging.error("Request failed on %s", args.uri)
+        return
+    except requests.Timeout:
+        logging.error("%s time reached, aborting request on %s", 5, args.uri)
+        return
+
+    logging.info("Response returned")
 
 
 if __name__ == "__main__":
