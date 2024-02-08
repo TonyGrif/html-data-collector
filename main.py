@@ -53,7 +53,7 @@ def main():
     logging.info("Requesting:%s", args.uri)
 
     try:
-        request = requests.get(args.uri, timeout=args.timeout)
+        response = requests.get(args.uri, timeout=args.timeout)
     except (
         requests.exceptions.MissingSchema,
         requests.exceptions.InvalidURL,
@@ -70,8 +70,8 @@ def main():
     hash_val = hashlib.md5(args.uri.encode("utf-8").strip())
     logging.info("Hash generated: %s", hash_val.hexdigest())
 
-    org_path = Path(f"output/{hash_val.hexdigest()}.txt")
-    org_path.parent.mkdir(exist_ok=True)
+    org_path = Path(f"output/original/{hash_val.hexdigest()}.txt")
+    org_path.parent.mkdir(exist_ok=True, parents=True)
 
     with open("output/KEYS.txt", "a+", encoding="utf-8") as keys:
         keys.seek(0)
@@ -83,7 +83,8 @@ def main():
             logging.info("Hash is already present in KEYS.txt")
 
     with open(org_path, "w", encoding="utf-8") as org:
-        pass
+        logging.info("Writing text to %s", org_path)
+        org.write(response.text)
 
 
 if __name__ == "__main__":
