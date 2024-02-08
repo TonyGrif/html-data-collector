@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e563771a16a0dc2cb5bfd5746d8035dca01e8dbe56fd48af8d8ca10948fad4fa"
+            "sha256": "a8cea6b50da3caff46c430a20a12fe4996835ee448485676075787bd634adb2b"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -176,15 +176,6 @@
             "markers": "python_version >= '3.8'",
             "version": "==3.13.1"
         },
-        "flake8": {
-            "hashes": [
-                "sha256:33f96621059e65eec474169085dc92bf26e7b2d47366b70be2f67ab80dc25132",
-                "sha256:a6dfbb75e03252917f2473ea9653f7cd799c3064e54d4c8140044c5c065f53c3"
-            ],
-            "index": "pypi",
-            "markers": "python_full_version >= '3.8.1'",
-            "version": "==7.0.0"
-        },
         "iniconfig": {
             "hashes": [
                 "sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3",
@@ -249,22 +240,6 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==1.4.0"
-        },
-        "pycodestyle": {
-            "hashes": [
-                "sha256:41ba0e7afc9752dfb53ced5489e89f8186be00e599e712660695b7a75ff2663f",
-                "sha256:44fe31000b2d866f2e41841b18528a505fbd7fef9017b04eff4e2648a0fadc67"
-            ],
-            "markers": "python_version >= '3.8'",
-            "version": "==2.11.1"
-        },
-        "pyflakes": {
-            "hashes": [
-                "sha256:1c61603ff154621fb2a9172037d84dca3500def8c8b630657d1701f026f8af3f",
-                "sha256:84b5be138a2dfbb40689ca07e2152deb896a65c3a3e24c251c5c62489568074a"
-            ],
-            "markers": "python_version >= '3.8'",
-            "version": "==3.2.0"
         },
         "pylint": {
             "hashes": [
@@ -355,7 +330,7 @@
                 "sha256:23478f88c37f27d76ac8aee6c905017a143b0b1b886c3c9f66bc2fd94f9f5783",
                 "sha256:af72aea155e91adfc61c3ae9e0e342dbc0cba726d6cba4b6c72c1f34e47291cd"
             ],
-            "markers": "python_version < '3.10'",
+            "markers": "python_version < '3.11'",
             "version": "==4.9.0"
         },
         "virtualenv": {
