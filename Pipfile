@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 requests = "*"
+boilerpy3 = "*"
 
 [dev-packages]
 pytest = "*"

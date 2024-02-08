@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "920299493d83634426b3df55c4244c77eb1acee96bbbc7ab3451608232773a06"
+            "sha256": "e9d2ed7d0aa75912cc72f1526a0341e26b8d583e5da17cd7ccc8792c822ae97c"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -14,6 +14,15 @@
         ]
     },
     "default": {
+        "boilerpy3": {
+            "hashes": [
+                "sha256:a9fede212f80a36dbc7d4f93e35d8636911cb6b37085a3230557d16ad0f076c8",
+                "sha256:fbfba91745606965400204d26852283ddf90235ab30afe9904de20051556a523"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.6'",
+            "version": "==1.0.7"
+        },
         "certifi": {
             "hashes": [
                 "sha256:0569859f95fc761b18b45ef421b1290a0f65f147e92a1e5eb3e635f9a5e4e66f",
@@ -460,7 +469,7 @@
                 "sha256:23478f88c37f27d76ac8aee6c905017a143b0b1b886c3c9f66bc2fd94f9f5783",
                 "sha256:af72aea155e91adfc61c3ae9e0e342dbc0cba726d6cba4b6c72c1f34e47291cd"
             ],
-            "markers": "python_version < '3.10'",
+            "markers": "python_version < '3.11'",
             "version": "==4.9.0"
         },
         "virtualenv": {
