@@ -17,6 +17,16 @@ def main():
     parser.add_argument("uri", type=str, help="The URI to gather text from.")
 
     parser.add_argument(
+        "-T",
+        metavar="timeout",
+        dest="timeout",
+        nargs="?",
+        type=float,
+        default=5,
+        help="The time before a HTTP request times out.",
+    )
+
+    parser.add_argument(
         "-v",
         "--verbose",
         action="store_const",
@@ -41,7 +51,7 @@ def main():
     logging.info("Requesting:%s", args.uri)
 
     try:
-        request = requests.get(args.uri, timeout=5)
+        request = requests.get(args.uri, timeout=args.timeout)
     except (
         requests.exceptions.MissingSchema,
         requests.exceptions.InvalidURL,
@@ -50,7 +60,7 @@ def main():
         logging.error("Request failed on %s", args.uri)
         return
     except requests.Timeout:
-        logging.error("%s time reached, aborting request on %s", 5, args.uri)
+        logging.error("%s time reached, aborting request on %s", args.timeout, args.uri)
         return
 
     logging.info("Response returned")
