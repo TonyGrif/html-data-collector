@@ -85,12 +85,12 @@ def main():
 
     with open("output/KEYS.txt", "a+", encoding="utf-8") as keys:
         keys.seek(0)
-        exists = f"{hash_val.hexdigest()}\n" in keys.readlines()
+        exists = f"{args.uri}\n" in keys.readlines()
         if not exists:
-            logging.info("Adding hash to KEYS.txt")
-            keys.write(hash_val.hexdigest() + "\n")
+            logging.info("Adding URI to KEYS.txt")
+            keys.write(args.uri + "\n")
         else:
-            logging.info("Hash is already present in KEYS.txt")
+            logging.info("URI is already present in KEYS.txt")
 
     with open(org_path, "w", encoding="utf-8") as org, open(
         boil_path, "w", encoding="utf-8"
