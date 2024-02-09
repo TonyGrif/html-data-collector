@@ -86,20 +86,13 @@ def main():
 
     with open("output/KEYS.csv", "a+", encoding="utf-8") as keys:
         keys.seek(0)
-        reader = csv.reader(keys, delimiter=",")
-        exists = False
-        for row in reader:
-            logging.info(row)
-            exists = f"{args.uri}" in ", ".join(row)
-            if exists:
-                break
-
-        if exists:
-            logging.info("URI is already present in KEYS.txt")
-        else:
+        exists = f"{args.uri}\n" in keys.readlines()
+        if not exists:
             logging.info("Adding URI to KEYS.txt")
             writer = csv.writer(keys, delimiter=",")
             writer.writerow([f"{hash_val.hexdigest()}", f"{args.uri}"])
+        else:
+            logging.info("URI is already present in KEYS.txt")
 
     with open(org_path, "w", encoding="utf-8") as org, open(
         boil_path, "w", encoding="utf-8"
