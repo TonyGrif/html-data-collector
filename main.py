@@ -3,6 +3,7 @@
 """Main module for the html data collector."""
 
 import argparse
+import csv
 import hashlib
 import logging
 from pathlib import Path
@@ -83,14 +84,22 @@ def main():
     boil_path = Path(f"output/processed/{hash_val.hexdigest()}.txt")
     boil_path.parent.mkdir(exist_ok=True, parents=True)
 
-    with open("output/KEYS.txt", "a+", encoding="utf-8") as keys:
+    with open("output/KEYS.csv", "a+", encoding="utf-8") as keys:
         keys.seek(0)
-        exists = f"{args.uri}\n" in keys.readlines()
-        if not exists:
-            logging.info("Adding URI to KEYS.txt")
-            keys.write(args.uri + "\n")
-        else:
+        reader = csv.reader(keys, delimiter=",")
+        exists = False
+        for row in reader:
+            logging.info(row)
+            exists = f"{args.uri}" in ", ".join(row)
+            if exists:
+                break
+
+        if exists:
             logging.info("URI is already present in KEYS.txt")
+        else:
+            logging.info("Adding URI to KEYS.txt")
+            writer = csv.writer(keys, delimiter=",")
+            writer.writerow([f"{hash_val.hexdigest()}", f"{args.uri}"])
 
     with open(org_path, "w", encoding="utf-8") as org, open(
         boil_path, "w", encoding="utf-8"
